@@ -4,11 +4,12 @@
   "description": "Backend for DevNet",
   "main": "main.js",
   "scripts": {
-   "dev":"nodemon ./src/app.js"
+    "dev": "nodemon ./src/app.js"
   },
   "author": "Asv",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1"
   }
 }

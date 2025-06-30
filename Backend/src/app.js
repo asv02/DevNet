@@ -1,36 +1,31 @@
 const express = require('express')
-
-const {adminAuth} = require('../middlewares/auth')
-
+const { adminAuth } = require('../middlewares/auth')
+const { connectDb } = require('../config/database')
+const User = require('../models/Users')
 const app = express()
+app.use('/admin', adminAuth);
 
-app.use('/admin',adminAuth);
+app.use(express.json());
 
-app.get('/admin/getAllData',(req,res,next)=>
-    { 
-        console.log('admin aduthorized URL')
-        res.send('All Data...')
-    })
+app.post('/user/signup', async (req, res, next) => {
+    const body = req.body;
+    console.log(body)
+    const user = new User(req.body)
+    await user.save()
 
-app.get('/user',(req,res,next)=>
-    {
-        console.log('get users information.....')
-        res.send('Users response...')
-    })
+    console.log('data saved...')
+    res.send('All Data...')
+})
 
-app.post('/user/:userId',(req,res)=>
-    {
-        console.log(req.params)
-        throw new Error('Some error')   
-    })
 
-app.use('/',(err,req,res,next)=>
-    {
-        console.log(err)
-        res.send('Error are part of development...')
-    })
 
-app.listen(3000,()=>
-    {
+connectDb().then(() => {
+    console.log('database connected')
+    app.listen(3000, () => {
         console.log('server started on  port 3000')
+    })
+})
+    .catch((err) => {
+        console.log('Some error occured in connection to database')
+        console.error(err)
     })
