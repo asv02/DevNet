@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const jwt = require('jsonwebtoken')
 
 const userSchema = new mongoose.Schema(
     {
@@ -70,6 +71,22 @@ const userSchema = new mongoose.Schema(
             default:"Nothing"
         }
     },{ timestamps: true })
+
+    userSchema.methods.generateAuthToken = async function()
+    {
+        try
+        {   
+            const user = this;
+            const token = jwt.sign({_id:user._id},'akash@123')
+            return token;
+        }
+        catch(err)
+        {
+            console.log('Error in generating token',err)
+            throw new Error('Error in generating token')
+        }
+    }
+
 
 const User = mongoose.model('User', userSchema)
 module.exports = User;

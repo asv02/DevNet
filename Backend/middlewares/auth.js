@@ -1,21 +1,26 @@
+const jwt = require('jsonwebtoken')
+const User = require('../models/Users')
 
-const adminAuth = (req,res,next)=>
-    {
-        console.log('admin Auth....')
-
-        const token = 'yz';
-        const isAdmin = token === 'xyz';
-        if(isAdmin)
-            {
-                next()
-            }
-        else
-        {
-            res.status(401).send('Unauthorized request...')
+const auth = async (req, res, next) => {
+    try {
+        const { token } = req?.cookies;
+        if (!token) {
+            throw new Error('Invalid Token !')
         }
+        const data = jwt.verify(token, 'akash@123');
+        const userId = data._id;
+        console.log("token->", token)
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error('User Not found!')
+        }
+        req.user = user;
+        next();
     }
-
-module.exports = 
-{
-    adminAuth
+    catch (err) {
+        res.status(500).send(`Can not validate credentials. ${err}`)
+    }
 }
+
+
+module.exports = auth;
