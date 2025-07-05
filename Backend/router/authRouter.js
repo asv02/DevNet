@@ -37,7 +37,7 @@ router.post('/user/signup', async (req, res, next) => {
             })
         console.log('user->', user)
         await user.save()
-        res.status(201).send("User saved successfully...")
+        res.status(201).json({message:"User saved successfully...",user:user})
     }
     catch (err) {
         console.log("err->", err)
@@ -55,19 +55,24 @@ router.post('/user/login',loginLimiter, async (req, res) => {
             console.log('Email validation failed...')
             throw new Error('EmailId is Invalid')
         }
-        const user = await User.findOne({ emailId: emailId })
+        var user = await User.findOne({ emailId: emailId })
+        if(!user)
+            {
+                res.status(404).send('User not found');
+            }
         const comparePassword = await argon2.verify(user.passWord,passWord)
         if (comparePassword) {
             const token = await user.generateAuthToken();
             console.log('token->',token)
             res.cookie('token',token)
-            res.status(200).send('Login Successfull', user);
+            res.status(200).json({message:'Login Successfull',user:user});
         }
         else {
-            res.status(404).send('Login failed')
+            throw new Error('Credentials mismatch')
         }
     }
     catch (err) {
+        console.log('user->',user)
         res.status(404).send(`Login failed : ${err.message}`,)
     }
 })

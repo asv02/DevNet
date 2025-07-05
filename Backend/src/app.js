@@ -6,11 +6,16 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const authRouter = require('../router/authRouter')
 const profileRouter = require('../router/profileRouter')
+const requestRouter = require('../router/connectionRequestRouter')
+const userRouter = require('../router/userRouter')
 app.use(express.json());
 app.use(cookieParser())
 
 app.use('/api',authRouter)
 app.use('/api',profileRouter)
+app.use('/api',requestRouter)
+app.use('/api',userRouter)
+
 
 connectDb().then(() => {
     console.log('database connected')
