@@ -1,3 +1,4 @@
+import {BASE_URL} from '../utils/Constant'
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/appSlice";
@@ -12,7 +13,7 @@ const Login = () => {
 
   const handleClick = async () => {
     try {
-      const data = await fetch("http://localhost:3000/api/user/login", {
+      const data = await fetch(BASE_URL+"/api/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -21,6 +22,11 @@ const Login = () => {
           passWord: password,
         }),
       });
+      if(!data.ok)
+        {
+          console.log(data.status)
+          return;
+        }
       const res = await data.json();
       dispatch(addUser(res))
       console.log(res);

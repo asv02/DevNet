@@ -47,38 +47,36 @@ router.post('/user/signup', async (req, res, next) => {
     console.log('data saved...')
 })
 
-router.post('/user/login',loginLimiter, async (req, res) => {
-    console.log('body->',req.body)
-    const { emailId, passWord } = req?.body;
-    console.log('emailId->',emailId,' password->',passWord)
-    console.log('emailId->',typeof(emailId),' password->',typeof(passWord))
+router.post('/user/login', loginLimiter, async (req, res) => {
+    const { emailId, passWord } = req.body;
     try {
         if (!validator.isEmail(emailId)) {
-            console.log('Email validation failed...')
-            throw new Error('EmailId is Invalid')
+            const error = new Error('Invalid email address format.');
+            error.statusCode = 400;
+            throw error;
         }
-        var user = await User.findOne({ emailId: emailId })
-        if(!user)
-            {
-                res.status(404).send('User not found');
-            }
-        const comparePassword = await argon2.verify(user.passWord,passWord)
-        if (comparePassword) {
-            const token = await user.generateAuthToken();
-            console.log('token->',token)
-            res.cookie('token',token)
-            res.status(200).json({message:'Login Successfull',user:user});
+        const user = await User.findOne({ emailId });
+        if (!user) {
+            const error = new Error('No account found with this email.');
+            error.statusCode = 404;
+            throw error;
         }
-        else {
-            throw new Error('Credentials mismatch')
+        const comparePassword = await argon2.verify(user.passWord, passWord);
+        if (!comparePassword) {
+            const error = new Error('Incorrect password.');
+            error.statusCode = 401;
+            throw error;
         }
+        const token = await user.generateAuthToken();
+        res.cookie('token', token);
+        res.status(200).json({ message: 'Login successful', user });
+    } catch (err) {
+        // Use the statusCode if set, otherwise default to 500
+        res.status(err.statusCode || 500).json({
+            error: err.message || 'An unexpected error occurred. Please try again.'
+        });
     }
-    catch (err) {
-        console.log('user->',user)
-        console.log(err)
-        res.status(404).send(`Login failed : ${err.message}`,)
-    }
-})
+});
 
 
 router.post('/user/logout',auth,(req,res)=>

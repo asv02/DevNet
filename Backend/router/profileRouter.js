@@ -9,7 +9,7 @@ router.get('/user/getUser',auth, async (req, res) => {
     try {
         const user = req.user;
         console.log(user)
-        res.status(200).send(user);
+        res.status(200).json({message:"User get fetched",user:user});
     }
     catch (err) {
         console.log("error in fetching ->", err)
