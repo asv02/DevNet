@@ -50,6 +50,8 @@ router.post('/user/signup', async (req, res, next) => {
 router.post('/user/login',loginLimiter, async (req, res) => {
     console.log('body->',req.body)
     const { emailId, passWord } = req?.body;
+    console.log('emailId->',emailId,' password->',passWord)
+    console.log('emailId->',typeof(emailId),' password->',typeof(passWord))
     try {
         if (!validator.isEmail(emailId)) {
             console.log('Email validation failed...')
@@ -73,6 +75,7 @@ router.post('/user/login',loginLimiter, async (req, res) => {
     }
     catch (err) {
         console.log('user->',user)
+        console.log(err)
         res.status(404).send(`Login failed : ${err.message}`,)
     }
 })
