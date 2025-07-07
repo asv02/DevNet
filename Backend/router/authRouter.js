@@ -37,11 +37,11 @@ router.post('/user/signup', async (req, res, next) => {
             })
         console.log('user->', user)
         await user.save()
-        res.status(201).json({message:"User saved successfully...",user:user})
+        res.status(201).json({message:"User saved successfully..."})
     }
     catch (err) {
         console.log("err->", err)
-        res.status(400).send(`${err.name}: ${err.message}`)
+        res.status(400).json({"message":`${err.name}: ${err.message}`})
     }
 
     console.log('data saved...')

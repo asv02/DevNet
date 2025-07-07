@@ -6,11 +6,11 @@ import FeedUser from "./FeedUser";
 
 const Feed = () => {
   const dispatch = useDispatch();
-  const feedForUser = useSelector((store)=> store.feedReducer?.data)
+  const feedForUser = useSelector((store)=> store.feedReducer)
 
   const feedfetch = async () => {
     try {
-        if(feedForUser) return;
+        if(feedForUser.length>0) return "No Feed available";
       const feed = await fetch(BASE_URL + "/api/users/feed", {
         credentials: "include",
       });
@@ -31,14 +31,23 @@ const Feed = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-6 justify-center p-4 bg-gray-50 min-h-screen">
-        {feedForUser && <FeedUser
-          _id = {feedForUser[1]?._id}
-          photoUrl={feedForUser[1]?.photoUrl}
-          firstName={feedForUser[1]?.firstName}
-          lastName={feedForUser[1]?.lastName}
-          about={feedForUser[1]?.about}
-        />}
+    <div className="flex flex-wrap gap-8 justify-center p-8 bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen">
+      {console.log("feedForUser in Feed->", feedForUser)}
+      {feedForUser && feedForUser.length > 0 ? (
+        feedForUser.map((feed) => (
+          <div key={feed._id} className="w-full max-w-sm bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+            <FeedUser
+              _id={feed._id}
+              photoUrl={feed.photoUrl}
+              firstName={feed.firstName}
+              lastName={feed.lastName}
+              about={feed.about}
+            />
+          </div>
+        ))
+      ) : (
+        <div className="text-gray-500 text-lg font-semibold mt-16">No Feed available</div>
+      )}
     </div>
   );
 };

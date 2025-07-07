@@ -17,12 +17,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Body/>}>
             <Route path="/login" element={<Login />}></Route>
-            <Route path="/signup" element={<SignUp />}></Route>
             <Route path="/Profile" element={<Profile/>}></Route>
             <Route path="/feed" element={<Feed/>}></Route>
             <Route path="/connection" element={<Connection/>}></Route>
             <Route path="/requests" element={<Requests/>}></Route>
           </Route>
+          <Route path="/signup" element={<SignUp />}></Route>
         </Routes>
       </BrowserRouter>
     </Provider>

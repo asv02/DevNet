@@ -5,58 +5,55 @@ import { useState } from "react";
 
 const FeedUser = ({ _id, firstName, lastName, about, photoUrl }) => {
   const dispatch = useDispatch();
-
-  const handleSend = async (status, fromUserId, _id) => {
-    const data = await fetch(
-      BASE_URL + "/api/request/send/" + status + "/" + fromUserId,
-      {
-        method: "POST",
-        credentials: "include",
+  // console.log(_id," ", typeof(_id));
+  const handleSend = async (status, _id) => {
+    try {
+      const data = await fetch(
+        BASE_URL + "/api/request/send/" + status + "/" + _id,
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
+      if (!data.ok) {
+        return;
       }
-    );
-    if (!data.ok) {
-      return;
+      const res = data.json();
+      console.log(_id," ", typeof(_id));
+      dispatch(removeFeed(_id));
+    } catch (err) {
+      console.log("error in sending request->",err.message);
     }
-    const res = data.json();
-    dispatch(removeFeed(_id))
   };
 
   return (
-    <>
-      <div className="card bg-base-100 w-96 shadow-sm m-3">
-        <figure className="px-10 pt-10">
-          <img
-            src={photoUrl}
-            alt={`${firstName} ${lastName}`}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "https://randomuser.me/api/portraits/men/1.jpg";
-            }}
-            className="w-24 h-24 rounded-full object-cover border-2 border-gray-300 mb-2"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">{firstName + " " + lastName}</h2>
-          <p>{about}</p>
-          {(
-            <div className="card-actions">
-              <button
-                className="btn btn-primary"
-                onClick={() => handleSend("Interested", _id)}
-              >
-                Interested
-              </button>
-              <button
-                className="btn btn-secondary"
-                onClick={() => handleSend("Ignored", _id)}
-              >
-                Ignored
-              </button>
-            </div>
-          )}
-        </div>
+    <div className="w-full max-w-sm bg-white rounded-xl shadow-lg p-6 m-4 flex flex-col items-center transition hover:shadow-2xl">
+      <img
+        src={photoUrl}
+        alt={`${firstName} ${lastName}`}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = "https://randomuser.me/api/portraits/men/1.jpg";
+        }}
+        className="w-28 h-28 rounded-full object-cover border-4 border-blue-200 mb-4 shadow"
+      />
+      <h2 className="text-xl font-bold text-blue-700 mb-1">{firstName + " " + lastName}</h2>
+      <p className="text-gray-600 mb-4 text-center">{about}</p>
+      <div className="flex gap-4 mt-2">
+        <button
+          className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition font-semibold shadow"
+          onClick={() => handleSend("Interested", _id)}
+        >
+          Interested
+        </button>
+        <button
+          className="bg-gray-300 text-gray-800 px-5 py-2 rounded hover:bg-gray-400 transition font-semibold shadow"
+          onClick={() => handleSend("Ignored", _id)}
+        >
+          Ignored
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

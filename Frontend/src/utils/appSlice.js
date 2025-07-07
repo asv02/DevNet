@@ -19,23 +19,15 @@ const userSlice = createSlice(
 
 const feedSlice = createSlice(
     {
-        name:"feedSlice",
-        initialState:null,
-        reducers:
-        {
-            addFeed:(state,action)=>
-                {
-                    return action.payload
-                },
-            removeFeed:(state,action)=>
-                {
-                    console.log(state)
-                    const tempArray = state.filter((res)=>
-                        {
-                            return res._id != action.payload
-                        })
-                    return tempArray;
-                }
+        name: "feedSlice",
+        initialState: [],
+        reducers: {
+            addFeed: (state, action) => {
+                return action.payload;
+            },
+            removeFeed: (state, action) => {
+                return state.filter((res) => res._id !== action.payload);
+            }
         }
     })
 

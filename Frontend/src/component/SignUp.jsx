@@ -30,100 +30,104 @@ const SignUp = () => {
                     passWord:password
                 }),
             })
+            const res = await data.json();
             if(!data.ok)
                 {
                     console.log("res->",res)
                     return;
                 }
-            const res = await data.json();
             console.log("navigating to login")
             return navigate('/login')
     }
 
   
   return (
-    <div className="flex justify-center">
-      <div className="flex justify-center">
-        <div className="card bg-base-100 w-96 shadow-sm">
-          <div className="card-body">
-            <h2 className="card-title">Edit Profile</h2>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">Photo</legend>
-              <input
-                type="text"
-                className="input"
-                value={Photo}
-                onChange={(e) => setPhoto(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">FirstName</legend>
-              <input
-                type="text"
-                className="input"
-                value={Firstname}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">LastName</legend>
-              <input
-                type="text"
-                className="input"
-                value={Lastname}
-                onChange={(e) => setlastName(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">EmailId</legend>
-              <input
-                type="text"
-                className="input"
-                value={emailId}
-                onChange={(e) => setEmailId(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">Password</legend>
-              <input
-                type="password"
-                className="input"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">Gender</legend>
-              <input
-                type="text"
-                className="input"
-                value={Gender}
-                onChange={(e) => setGender(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">About</legend>
-              <input
-                type="text"
-                className="input"
-                value={About}
-                onChange={(e) => setAbout(e.target.value)}
-              />
-            </fieldset>
-            <fieldset>
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary" onClick={handleSave}>Save Profile</button>
-              </div>
-            </fieldset>
+    <div className="flex flex-col md:flex-row justify-center items-start gap-8 p-8 bg-base-200 min-h-screen">
+      <div className="w-full max-w-md mx-auto bg-base-100 rounded-xl shadow-lg p-8">
+        <h2 className="text-2xl font-bold mb-6 text-center text-primary">Sign Up</h2>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-base-content font-semibold mb-1">Photo URL</label>
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              value={Photo}
+              onChange={(e) => setPhoto(e.target.value)}
+            />
           </div>
-        </div>
+          <div>
+            <label className="block text-base-content font-semibold mb-1">First Name</label>
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              value={Firstname}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-base-content font-semibold mb-1">Last Name</label>
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              value={Lastname}
+              onChange={(e) => setlastName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-base-content font-semibold mb-1">Email</label>
+            <input
+              type="email"
+              className="input input-bordered w-full"
+              value={emailId}
+              onChange={(e) => setEmailId(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-base-content font-semibold mb-1">Password</label>
+            <input
+              type="password"
+              className="input input-bordered w-full"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-base-content font-semibold mb-1">Gender</label>
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              value={Gender}
+              onChange={(e) => setGender(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-base-content font-semibold mb-1">About</label>
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              value={About}
+              onChange={(e) => setAbout(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-end">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleSave}
+            >
+              Sign Up
+            </button>
+          </div>
+        </form>
       </div>
-      <UserCard
-        photoUrl={Photo}
-        firstName={Firstname}
-        lastName={Lastname}
-        about={About}
-      />
+      <div className="w-full max-w-xs mx-auto mt-8 md:mt-0">
+        <UserCard
+          photoUrl={Photo}
+          firstName={Firstname}
+          lastName={Lastname}
+          about={About}
+        />
+      </div>
     </div>
   );
 };

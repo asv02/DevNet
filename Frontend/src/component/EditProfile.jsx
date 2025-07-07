@@ -32,70 +32,74 @@ const EditProfile = ({ photoUrl, firstName, lastName, gender, about }) => {
 
   
   return (
-    <div className="flex justify-center">
-      <div className="flex justify-center">
-        <div className="card bg-base-100 w-96 shadow-sm">
-          <div className="card-body">
-            <h2 className="card-title">Edit Profile</h2>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">Photo</legend>
-              <input
-                type="text"
-                className="input"
-                value={Photo}
-                onChange={(e) => setPhoto(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">FirstName</legend>
-              <input
-                type="text"
-                className="input"
-                value={Firstname}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">LastName</legend>
-              <input
-                type="text"
-                className="input"
-                value={Lastname}
-                onChange={(e) => setlastName(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">Gender</legend>
-              <input
-                type="text"
-                className="input"
-                value={Gender}
-                onChange={(e) => setGender(e.target.value)}
-              />
-            </fieldset>
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">About</legend>
-              <input
-                type="text"
-                className="input"
-                value={About}
-                onChange={(e) => setAbout(e.target.value)}
-              />
-            </fieldset>
-            <fieldset>
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary" onClick={handleSave}>Save Profile</button>
-              </div>
-            </fieldset>
+    <div className="flex flex-col md:flex-row justify-center items-start gap-8 p-8 bg-gray-50 min-h-screen">
+      <div className="w-full max-w-md mx-auto bg-white rounded-xl shadow-lg p-8">
+        <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">Edit Profile</h2>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">Photo URL</label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={Photo}
+              onChange={(e) => setPhoto(e.target.value)}
+            />
           </div>
-        </div>
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">First Name</label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={Firstname}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">Last Name</label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={Lastname}
+              onChange={(e) => setlastName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">Gender</label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={Gender}
+              onChange={(e) => setGender(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 font-semibold mb-1">About</label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={About}
+              onChange={(e) => setAbout(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-end">
+            <button
+              type="button"
+              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+              onClick={handleSave}
+            >
+              Save Profile
+            </button>
+          </div>
+        </form>
       </div>
-      <UserCard
-        photoUrl={Photo}
-        firstName={Firstname}
-        lastName={Lastname}
-        about={About}
-      />
+      <div className="w-full max-w-xs mx-auto mt-8 md:mt-0">
+        <UserCard
+          photoUrl={Photo}
+          firstName={Firstname}
+          lastName={Lastname}
+          about={About}
+        />
+      </div>
     </div>
   );
 };

@@ -6,8 +6,6 @@ import RequestedUser from "./RequestedUser"
 
 const Requests = () => {
 
-
-
   const dispatch = useDispatch();
   const requests = async () => {
 
@@ -31,13 +29,24 @@ const Requests = () => {
 
   const requestForUser = useSelector((store) => store.requestReducer);
   console.log("requestForUser->", requestForUser);
-  {
-    return (<div>
-        {requestForUser?.data?.filter((res)=>
-        {
-            return <RequestedUser requestedId = {res._id} firstName={res.fromUserId.firstName} lastName={res.fromUserId.lastName} photoUrl={res.fromUserId.photoUrl}/>
-        })}</div>);
-  }
+  return (
+    <div className="flex flex-wrap gap-8 justify-center p-8 bg-base-200 min-h-screen">
+      {requestForUser?.data?.length > 0 ? (
+        requestForUser.data.map((res) => (
+          <RequestedUser
+            key={res._id}
+            requestedId={res._id}
+            firstName={res.fromUserId.firstName}
+            lastName={res.fromUserId.lastName}
+            photoUrl={res.fromUserId.photoUrl}
+            about={res.fromUserId.about}
+          />
+        ))
+      ) : (
+        <div className="text-base-content text-lg font-semibold mt-16">No Requests available</div>
+      )}
+    </div>
+  );
 };
 
 export default Requests;
