@@ -17,12 +17,12 @@ router.get('/user/getUser',auth, async (req, res) => {
     }
 })
 
-router.patch('/user/updateUser',auth,async(req,res)=>
+router.put('/user/updateUser',auth,async(req,res)=>
 {
     const user = req.user;
     if(!updateValidator(req))
         {
-            res.status(404).send("Fields not allowed to update");
+            res.status(404).json({message:"Fields not allowed to update"});
         }
     try
     { 

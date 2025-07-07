@@ -127,7 +127,7 @@ router.get('/users/feed', auth, async (req, res) => {
             hideUser.add(key.toUserId.toString());
         });
 
-        // console.log("AllUsers->",allUsers)
+        console.log("AllUsers->",allUsers)
         const excludeIds = Array.from(hideUser);
         const availableUsers = await User.find({ _id: { $nin: excludeIds } })
             .skip(skip)

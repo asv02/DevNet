@@ -1,7 +1,7 @@
 import { useDispatch, useSelector} from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../utils/Constant'
-import { addUser, removeUser } from '../utils/appSlice'
+import {removeUser } from '../utils/appSlice'
 
 
 const Navbar = () => {
@@ -50,7 +50,10 @@ const Navbar = () => {
             <span className="badge">New</span>
           </Link>
         </li>
-        <li><a>Settings</a></li>
+        <li><Link to="/connection">Connection</Link></li>
+        <li><Link to="/requests">Requests</Link></li>
+        <li><Link to="/feed">Feed</Link></li>
+        <li><Link to="/signup">SignUp</Link></li>
         <li><a onClick={handleLogout}>Logout</a></li>
       </ul>
     </div>}

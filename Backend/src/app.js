@@ -1,19 +1,26 @@
 const express = require('express')
 const { connectDb } = require('../config/database')
 const cors = require('cors')
-const cookieParser = require('cookie-parser')
 
 const app = express()
+
+app.use(cors({
+    origin: "http://localhost:5173",
+    methods:['GET','POST','PUT','PATCH','DELETE'],
+    credentials: true
+}))
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+    next();
+  });
+
+const cookieParser = require('cookie-parser')
 const authRouter = require('../router/authRouter')
 const profileRouter = require('../router/profileRouter')
 const requestRouter = require('../router/connectionRequestRouter')
 const userRouter = require('../router/userRouter')
 
-
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-}))
 
 app.use(express.json());
 app.use(cookieParser())

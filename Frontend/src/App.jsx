@@ -5,6 +5,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {appStore} from "./utils/appStore";
 import {Provider} from 'react-redux'
 import Profile from "./component/Profile";
+import Feed from "./component/Feed"
+import Connection from "./component/Connection";
+import Requests from "./component/Requests";
+import SignUp from "./component/SignUp";
 
 function App() {
   return (
@@ -13,7 +17,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Body/>}>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/signup" element={<SignUp />}></Route>
             <Route path="/Profile" element={<Profile/>}></Route>
+            <Route path="/feed" element={<Feed/>}></Route>
+            <Route path="/connection" element={<Connection/>}></Route>
+            <Route path="/requests" element={<Requests/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
