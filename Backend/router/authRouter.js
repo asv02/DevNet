@@ -5,7 +5,7 @@ const argon2 = require('argon2');
 const validator = require('validator');
 const rateLimit = require('express-rate-limit');
 const auth = require('../middlewares/auth');
-const signupValidator = require('../utils/signupValidator');
+const signupValidator = require('../utils/signUpValidator');
 
 const loginLimiter = rateLimit({
     windowMs: 1 * 60 * 1000,  // 1 minute
