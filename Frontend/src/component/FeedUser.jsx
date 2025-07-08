@@ -9,7 +9,7 @@ const FeedUser = ({ _id, firstName, lastName, about, photoUrl }) => {
   const handleSend = async (status, _id) => {
     try {
       const data = await fetch(
-        BASE_URL + "/api/request/send/" + status + "/" + _id,
+        BASE_URL + "/request/send/" + status + "/" + _id,
         {
           method: "POST",
           credentials: "include",
@@ -33,7 +33,7 @@ const FeedUser = ({ _id, firstName, lastName, about, photoUrl }) => {
         alt={`${firstName} ${lastName}`}
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = "https://randomuser.me/api/portraits/men/1.jpg";
+          e.target.src = "https://randomuser.me/portraits/men/1.jpg";
         }}
         className="w-28 h-28 rounded-full object-cover border-4 border-blue-200 mb-4 shadow"
       />

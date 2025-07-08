@@ -10,7 +10,7 @@ const Requests = () => {
   const requests = async () => {
 
     try {
-      const data = await fetch(BASE_URL + "/api/users/requests/received", {
+      const data = await fetch(BASE_URL + "/users/requests/received", {
         credentials: "include",
       });
       if (!data.ok) {

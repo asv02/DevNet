@@ -8,7 +8,7 @@ const Connection = ()=>
     {
     const dispatch = useDispatch();
     const fetchConnection = async () => {
-        const connection = await fetch(BASE_URL + '/api/users/connections', {
+        const connection = await fetch(BASE_URL + '/users/connections', {
             credentials: "include"
         });
         if (!connection.ok) {

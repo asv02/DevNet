@@ -9,7 +9,7 @@ const RequestedUser = ({requestedId, firstName, lastName, about, photoUrl }) => 
     
     const handleRecieve = async (status, requestedId) => {
     const data = await fetch(
-      BASE_URL + "/api/request/review/" + status + "/" + requestedId,
+      BASE_URL + "/request/review/" + status + "/" + requestedId,
       {
         method:"POST",
         credentials: "include",
@@ -34,7 +34,7 @@ const RequestedUser = ({requestedId, firstName, lastName, about, photoUrl }) => 
           alt={`${firstName} ${lastName}`}
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = "https://randomuser.me/api/portraits/men/1.jpg";
+            e.target.src = "https://randomuser.me/portraits/men/1.jpg";
           }}
           className="w-24 h-24 rounded-full object-cover border-2 border-primary mb-2"
         />

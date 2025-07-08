@@ -13,7 +13,7 @@ const Navbar = () => {
   
   const handleLogout = async()=>
     {
-      const user = await fetch(BASE_URL+'/api/user/logout',{
+      const user = await fetch(BASE_URL+'/user/logout',{
         method:'POST',
         credentials:'include'
       })

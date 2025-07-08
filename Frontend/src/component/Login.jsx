@@ -13,7 +13,7 @@ const Login = () => {
 
   const handleClick = async () => {
     try {
-      const data = await fetch(BASE_URL+"/api/user/login", {
+      const data = await fetch(BASE_URL+"/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

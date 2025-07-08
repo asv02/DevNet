@@ -16,7 +16,7 @@ const SignUp = () => {
 
   const handleSave = async()=>
     {
-        const data = await fetch(BASE_URL+'/api/user/signup',
+        const data = await fetch(BASE_URL+'/user/signup',
             {
                 method:'POST',
                 headers: { "Content-Type": "application/json" },

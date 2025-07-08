@@ -13,7 +13,7 @@ const Body = () => {
 
   const handleUser = async () => {
     try {
-      const user = await fetch(BASE_URL + "/api/user/getUser", {
+      const user = await fetch(BASE_URL + "/user/getUser", {
         credentials: "include",
       });
       if (!user.ok) {

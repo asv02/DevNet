@@ -11,7 +11,7 @@ const Feed = () => {
   const feedfetch = async () => {
     try {
         if(feedForUser.length>0) return "No Feed available";
-      const feed = await fetch(BASE_URL + "/api/users/feed", {
+      const feed = await fetch(BASE_URL + "/users/feed", {
         credentials: "include",
       });
       if (!feed.ok) {

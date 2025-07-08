@@ -11,7 +11,7 @@ const EditProfile = ({ photoUrl, firstName, lastName, gender, about }) => {
 
   const handleSave = async()=>
     {
-        const data = await fetch(BASE_URL+'/api/user/updateUser',
+        const data = await fetch(BASE_URL+'/user/updateUser',
             {
                 method:'PUT',
                 headers: { "Content-Type": "application/json" },
