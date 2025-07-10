@@ -9,6 +9,7 @@ import Feed from "./component/Feed"
 import Connection from "./component/Connection";
 import Requests from "./component/Requests";
 import SignUp from "./component/SignUp";
+import Chat from "./component/Chat";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/feed" element={<Feed/>}></Route>
             <Route path="/connection" element={<Connection/>}></Route>
             <Route path="/requests" element={<Requests/>}></Route>
+            <Route path="/chat/:userId" element={<Chat/>}></Route>
           </Route>
           <Route path="/signup" element={<SignUp />}></Route>
         </Routes>
